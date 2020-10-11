@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AglTest.Models.PeopleInfo>
+
+@{
+    ViewData["Title"] = "People";
+}
+
+<h2>People</h2>
+
+<table>
+    <tr>
+
+
+        <th>Gender</th>
+
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(m => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.gender)
+                </td>
+                <td></td>
+
+                @if (item.pets != null)
+
+                {
+                    @foreach (var item1 in item.pets)
+                    {
+                        @if (item1.type == "Cat")
+                        {
+                            <td>
+                                @Html.DisplayFor(m => item1.name)
+                            </td>
+                        }
+                    }
+                }
+
+            </tr>
+
+        }
+        break;
+    }
+</table>
