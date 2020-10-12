@@ -46,21 +46,20 @@ namespace AglTest.Controllers
 
                 List<PeopleInfo> peopleinfo = new List<PeopleInfo>();
 
-                peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
+                  peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
 
-
-
-                var results = from p in peopleinfo
-                              group p.gender by p.name into g
-                              select new { name = g.Key, Pets = g.ToList() };
-
-    
-
-
+               
+                
                 return View(peopleinfo);
+
+
             }
+                                                                                       
+              
+              
+            
         }
-        
+                                        
             public IActionResult About()
         {
 

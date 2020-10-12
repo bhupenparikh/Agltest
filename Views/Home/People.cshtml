@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AglTest.Models.PeopleInfo>
+﻿@model IList<AglTest.Models.PeopleInfo>
 
 @{
     ViewData["Title"] = "People";
@@ -10,7 +10,7 @@
     <tr>
 
 
-        <th>Gender</th>
+        <th>Male</th>
 
     </tr>
     @for (int i = 0; i < Model.Count(); i++)
@@ -19,15 +19,8 @@
         {
             <tr>
 
-                <td>
-                    @Html.DisplayFor(m => item.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.gender)
-                </td>
-                <td></td>
 
-                @if (item.pets != null)
+                @if (item.pets != null && item.gender == "Male")
 
                 {
                     @foreach (var item1 in item.pets)
@@ -46,4 +39,38 @@
         }
         break;
     }
+    <tr>
+
+
+        <th>Female</th>
+
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        @foreach (var item in Model)
+        {
+<tr>
+
+
+    @if (item.pets != null && item.gender == "Female")
+
+    {
+        @foreach (var item1 in item.pets)
+        {
+            @if (item1.type == "Cat")
+            {
+                <td>
+                    @Html.DisplayFor(m => item1.name)
+                </td>
+            }
+        }
+    }
+
+</tr>
+
+        }
+        break;
+    }
+
+
 </table>
