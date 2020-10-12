@@ -31,36 +31,39 @@ namespace AglTest.Controllers
             return View();
                         
         }
-        public IActionResult People()
+        /// <summary>
+        /// retrives web APi response
+        /// </summary>
+        /// <param name="peopleinfo"></param>
+        /// <returns></returns>
+        public IActionResult People(List<PeopleInfo> peopleinfo)
         {
             string _baseUri = _config.GetValue<string>(
                 "ConnectionAglAPI:baseURI");
-
-
-            
+                                   
             var requestUri = $"{_baseUri}";
             using (WebClient wc = new WebClient())
             {
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = wc.DownloadString(new Uri(requestUri));
 
-                List<PeopleInfo> peopleinfo = new List<PeopleInfo>();
+                 peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
 
-                  peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
-
-               
-                
-                return View(peopleinfo);
+                                     
 
 
             }
-                                                                                       
-              
-              
-            
+            return View(peopleinfo);
+
+
+
         }
-                                        
-            public IActionResult About()
+               /// <summary>
+               /// 
+               /// </summary>
+               /// <param name="peopleinfo"></param>
+               /// <returns></returns>               
+            public IActionResult About(List<PeopleInfo> peopleinfo)
         {
 
             string _baseUri = _config.GetValue<string>(
@@ -71,16 +74,11 @@ namespace AglTest.Controllers
             {
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = wc.DownloadString(new Uri(requestUri));
-
-                List<PeopleInfo> peopleinfo = new List<PeopleInfo>();
-
+                              
                 peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
 
-
-
-                return View(peopleinfo);
-            }
-
+             }
+            return View(peopleinfo);
 
         }
         
