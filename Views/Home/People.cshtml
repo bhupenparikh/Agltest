@@ -6,18 +6,17 @@
 
 <h2>People</h2>
 
-<table>
-    <tr>
 
 
-        <th>Male</th>
 
-    </tr>
+        <h4>Male</h4>
+
+    
     @for (int i = 0; i < Model.Count(); i++)
     {
         @foreach (var item in Model)
         {
-            <tr>
+            <ul>
 
 
                 @if (item.pets != null && item.gender == "Male")
@@ -27,28 +26,28 @@
                     {
                         @if (item1.type == "Cat")
                         {
-                            <td>
+                            <li>
                                 @Html.DisplayFor(m => item1.name)
-                            </td>
+                            </li>
                         }
                     }
                 }
 
-            </tr>
+            </ul>
 
         }
         break;
     }
-    <tr>
+   
         
-        <th>Female</th>
+        <h4>Female</h4>
 
-    </tr>
+    
     @for (int i = 0; i < Model.Count(); i++)
     {
         @foreach (var item in Model)
         {
-        <tr>
+        <ul>
 
 
               @if (item.pets != null && item.gender == "Female")
@@ -58,18 +57,18 @@
         {
             @if (item1.type == "Cat")
             {
-                <td>
+                <li>
                     @Html.DisplayFor(m => item1.name)
-                </td>
+                </li>
             }
         }
     }
 
-        </tr>
+        </ul>
 
         }
         break;
     }
 
 
-</table>
+
