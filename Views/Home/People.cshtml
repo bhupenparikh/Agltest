@@ -40,8 +40,7 @@
         break;
     }
     <tr>
-
-
+        
         <th>Female</th>
 
     </tr>
@@ -49,10 +48,10 @@
     {
         @foreach (var item in Model)
         {
-<tr>
+        <tr>
 
 
-    @if (item.pets != null && item.gender == "Female")
+              @if (item.pets != null && item.gender == "Female")
 
     {
         @foreach (var item1 in item.pets)
@@ -66,7 +65,7 @@
         }
     }
 
-</tr>
+        </tr>
 
         }
         break;
