@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using AglTest.Models;
 using System.Net;
 using Newtonsoft.Json;
+using AglTest.Services;
 using Microsoft.Extensions.Configuration;
+using AglTest.Core;
 
 namespace AglTest.Controllers
 {
@@ -16,13 +18,15 @@ namespace AglTest.Controllers
 
         private readonly IConfiguration _config;
         private readonly Uri _baseUri;
+        private readonly IAglGatewayService _AglGatewayService;
+
+
        
 
-        public object request { get; private set; }
-
-        public HomeController(IConfiguration config)
+        public HomeController(IConfiguration config,IAglGatewayService AglGatewayService)
         {
             _config = config;
+            _AglGatewayService = AglGatewayService;
         }
 
         
@@ -38,46 +42,30 @@ namespace AglTest.Controllers
         /// <returns></returns>
         public IActionResult People(List<PeopleInfo> peopleinfo)
         {
-            string _baseUri = _config.GetValue<string>(
-                "ConnectionAglAPI:baseURI");
-                                   
-            var requestUri = $"{_baseUri}";
-            using (WebClient wc = new WebClient())
-            {
-                wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-                var response = wc.DownloadString(new Uri(requestUri));
-
-                 peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
-
-                                     
 
 
-            }
+            peopleinfo = _AglGatewayService.GetJsonresponse();
+
             return View(peopleinfo);
 
 
 
         }
-               /// <summary>
-               /// 
-               /// </summary>
-               /// <param name="peopleinfo"></param>
-               /// <returns></returns>               
-            public IActionResult About(List<PeopleInfo> peopleinfo)
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peopleinfo"></param>
+        /// <returns></returns>               
+        public IActionResult About(List<PeopleInfo> peopleinfo)
         {
 
-            string _baseUri = _config.GetValue<string>(
-                "ConnectionAglAPI:baseURI");
 
-            var requestUri = $"{_baseUri}";
-            using (WebClient wc = new WebClient())
-            {
-                wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-                var response = wc.DownloadString(new Uri(requestUri));
-                              
-                peopleinfo = JsonConvert.DeserializeObject<List<PeopleInfo>>(response);
 
-             }
+            peopleinfo = _AglGatewayService.Test();
+
+
             return View(peopleinfo);
 
         }
