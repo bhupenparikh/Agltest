@@ -7,7 +7,7 @@ using AglTest.Models;
 namespace AglTest.Services
 {
     public interface IAglGatewayService
-    {
+    {///
         List<PeopleInfo> GetJsonresponse();
 
         /// <summary>
